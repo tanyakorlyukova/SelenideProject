@@ -20,7 +20,7 @@ public class SelenideTest {
 
     @Test
     public void selenideTestScenario() {
-        String couponName = "Coupon777666";
+        String couponName = "couponName1111";
 
         Configuration.startMaximized=true;
         open("http://open-eshop.stqa.ru/oc-panel/auth/login/");
@@ -49,12 +49,14 @@ public class SelenideTest {
         $(By.tagName("tr")).should(exist);
 
         //delete coupon
-        $("a[class='btn btn-danger index-delete']").click();
+        sleep(1000);
+        $("a.index-delete").click();
         $(".confirm").click();
+        $(By.tagName("tr")).shouldNot(exist);
 
         //logout
-        $("a.index-delete").click();
-        $(By.xpath("//i[@class='glyphicon glyphglyphicon glyphicon-off']/ancestor::a")).click();
+        $("a.dropdown-toggle.navbar-btn").click();
+        $(By.partialLinkText("Logout")).click();
         $("a[class='btn btn-primary-white']").shouldBe(visible);
     }
 
